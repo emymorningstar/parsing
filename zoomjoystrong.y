@@ -31,18 +31,24 @@
 %%
 drawing_list:	drawing
 	|	drawing drawing_list
+
 ;
 drawing: point|line|circle|rectangle|set_color
 ;
-point: STRING INT INT INT
+point: POINT INT INT INT
+{zoomjoystrong::point($2,$3,$4);}
 ;
-line:STRING INT INT INT INT
+line:LINE INT INT INT INT
+{zoomjoystrong::line($2,$3,$4,$5);}
 ;
-circle: STRING INT INT INT
+circle: CIRCLE INT INT INT
+{zoomjoystrong::circle($2,$3,$4);}
 ;
-rectangle:STRING INT INT INT INT
+rectangle:RECTANGLE INT INT INT INT
+{zoomjoystrong::rectangle($2,$3,$4,$5);}
 ;
-set_color: STRING INT INT INT
+set_color: SET_COLOR INT INT INT
+{zoomjoystrong::set_color($2,$3,$4);}
 ;
 int main(int argc, char** argv){
 	yyparse();

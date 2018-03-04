@@ -11,6 +11,8 @@
 (circle)[0-9]+ [0-9]+ [0-9]+{ yylval.str = strdup(yytext); return CIRCLE; }
 (rectangle)[0-9]+ [0-9]+ [0-9]+ [0-9]+{ yylval.str = strdup(yytext); return RECTANGLE; }
 (set_color)[0-9]+ [0-9]+ [0-9]+ { yylval.str = strdup(yytext); return SET_COLOR; }
-[ \t\n]				;
+[ \t\n]				            ;
+\;                              {return END_STATEMENT;}
 .                               {return ERROR;}
+
 %%
