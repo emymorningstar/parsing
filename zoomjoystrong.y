@@ -1,8 +1,9 @@
 %{
 	#include <stdio.h>
+	#include "zoomjoystrong.h"
 	void yyerror(const char* msg);
 	int yylex();
-	int num_contacts = 0;
+	
 %}
 
 %error-verbose
@@ -33,23 +34,25 @@ drawing_list:	drawing
 	|	drawing drawing_list
 
 ;
-drawing: point|line|circle|rectangle|set_color
+drawing: point END_STATEMENT|line END_STATEMENT|circle END_STATEMENT|rectangle END_STATEMENT|set_color END_STATEMENT
 ;
-point: POINT INT INT INT
-{zoomjoystrong::point($2,$3,$4);}
+point: POINT INT INT
+{point($2,$3);}
 ;
 line:LINE INT INT INT INT
-{zoomjoystrong::line($2,$3,$4,$5);}
+{line($2,$3,$4,$5);}
 ;
 circle: CIRCLE INT INT INT
-{zoomjoystrong::circle($2,$3,$4);}
+{circle($2,$3,$4);}
 ;
 rectangle:RECTANGLE INT INT INT INT
-{zoomjoystrong::rectangle($2,$3,$4,$5);}
+{rectangle($2,$3,$4,$5);}
 ;
 set_color: SET_COLOR INT INT INT
-{zoomjoystrong::set_color($2,$3,$4);}
+{set_color($2,$3,$4);}
 ;
+
+%%
 int main(int argc, char** argv){
 	yyparse();
 
