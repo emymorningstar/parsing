@@ -37,7 +37,13 @@ drawing_list:	drawing
 	|	drawing drawing_list
 
 ;
-drawing: point END_STATEMENT|line END_STATEMENT|circle END_STATEMENT|rectangle END_STATEMENT|set_color END_STATEMENT|bad|bad END_STATEMENT
+drawing: 	point END_STATEMENT
+	|	line END_STATEMENT
+	|	circle END_STATEMENT
+	|	rectangle END_STATEMENT
+	|	set_color END_STATEMENT
+	|	bad
+	|	bad END_STATEMENT
 ;
 point: POINT INT INT
 /*	height is 768 
