@@ -54,7 +54,8 @@ extern int yydebug;
     SET_COLOR = 264,
     INT = 265,
     FLOAT = 266,
-    STRING = 267
+    STRING = 267,
+    ERROR_INPUT = 268
   };
 #endif
 
@@ -66,7 +67,7 @@ union YYSTYPE
 #line 11 "zoomjoystrong.y" /* yacc.c:1909  */
  int i; char* str; float f;
 
-#line 70 "zoomjoystrong.tab.h" /* yacc.c:1909  */
+#line 71 "zoomjoystrong.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

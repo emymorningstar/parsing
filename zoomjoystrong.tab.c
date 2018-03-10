@@ -114,7 +114,8 @@ extern int yydebug;
     SET_COLOR = 264,
     INT = 265,
     FLOAT = 266,
-    STRING = 267
+    STRING = 267,
+    ERROR_INPUT = 268
   };
 #endif
 
@@ -126,7 +127,7 @@ union YYSTYPE
 #line 11 "zoomjoystrong.y" /* yacc.c:355  */
  int i; char* str; float f;
 
-#line 130 "zoomjoystrong.tab.c" /* yacc.c:355  */
+#line 131 "zoomjoystrong.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -143,7 +144,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 147 "zoomjoystrong.tab.c" /* yacc.c:358  */
+#line 148 "zoomjoystrong.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -383,23 +384,23 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  18
+#define YYFINAL  20
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   32
+#define YYLAST   35
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  13
+#define YYNTOKENS  14
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  8
+#define YYNNTS  9
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  13
+#define YYNRULES  16
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  36
+#define YYNSTATES  39
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   267
+#define YYMAXUTOK   268
 
 #define YYTRANSLATE(YYX)                                                \
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -434,15 +435,15 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11,    12
+       5,     6,     7,     8,     9,    10,    11,    12,    13
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    33,    33,    34,    37,    37,    37,    37,    37,    39,
-      42,    45,    48,    51
+       0,    36,    36,    37,    40,    40,    40,    40,    40,    40,
+      40,    42,    51,    60,    69,    79,    90
 };
 #endif
 
@@ -452,9 +453,9 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "END", "END_STATEMENT", "POINT", "LINE",
-  "CIRCLE", "RECTANGLE", "SET_COLOR", "INT", "FLOAT", "STRING", "$accept",
-  "drawing_list", "drawing", "point", "line", "circle", "rectangle",
-  "set_color", YY_NULLPTR
+  "CIRCLE", "RECTANGLE", "SET_COLOR", "INT", "FLOAT", "STRING",
+  "ERROR_INPUT", "$accept", "drawing_list", "drawing", "point", "line",
+  "circle", "rectangle", "set_color", "bad", YY_NULLPTR
 };
 #endif
 
@@ -464,7 +465,7 @@ static const char *const yytname[] =
 static const yytype_uint16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267
+     265,   266,   267,   268
 };
 # endif
 
@@ -482,10 +483,10 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -5,    -4,    -3,    -2,    -1,     0,     5,    -5,     7,     8,
-       9,    10,    11,     6,    12,    13,    14,    15,    -6,    -6,
-      -6,    -6,    -6,    -6,    -6,    -6,    16,    17,    18,    19,
-      20,    -6,    21,    -6,    -6,    -6
+      -5,    -4,    -3,    -1,     0,     1,    -6,     5,    -5,     8,
+       9,    10,    11,    12,    13,    14,    15,    16,    17,    18,
+      -6,    -6,    -6,    -6,    -6,    -6,    -6,    -6,    -6,    19,
+      20,    21,    22,    23,    -6,    24,    -6,    -6,    -6
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -493,22 +494,22 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     0,     0,     0,     0,     0,     0,     2,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     1,     3,
-       4,     5,     6,     7,     8,     9,     0,     0,     0,     0,
-       0,    11,     0,    13,    10,    12
+       0,     0,     0,     0,     0,     0,    16,     0,     2,     0,
+       0,     0,     0,     0,     9,     0,     0,     0,     0,     0,
+       1,     3,     4,     5,     6,     7,     8,    10,    11,     0,
+       0,     0,     0,     0,    13,     0,    15,    12,    14
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -6,    25,    -6,    -6,    -6,    -6,    -6,    -6
+      -6,    27,    -6,    -6,    -6,    -6,    -6,    -6,    -6
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     6,     7,     8,     9,    10,    11,    12
+      -1,     7,     8,     9,    10,    11,    12,    13,    14
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -516,42 +517,42 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-       1,     2,     3,     4,     5,    18,    13,    14,    15,    16,
-      17,    20,    21,    22,    23,    24,    25,     0,     0,     0,
-       0,     0,    26,    27,    28,    29,    30,    31,    32,    33,
-      34,    35,    19
+       1,     2,     3,     4,     5,    20,    15,    16,     6,    17,
+      18,    19,    22,    23,    24,    25,    26,    27,     0,     0,
+       0,     0,     0,     0,    28,    29,    30,    31,    32,    33,
+      34,    35,    36,    37,    38,    21
 };
 
 static const yytype_int8 yycheck[] =
 {
-       5,     6,     7,     8,     9,     0,    10,    10,    10,    10,
-      10,     4,     4,     4,     4,     4,    10,    -1,    -1,    -1,
-      -1,    -1,    10,    10,    10,    10,    10,    10,    10,    10,
-      10,    10,     7
+       5,     6,     7,     8,     9,     0,    10,    10,    13,    10,
+      10,    10,     4,     4,     4,     4,     4,     4,    -1,    -1,
+      -1,    -1,    -1,    -1,    10,    10,    10,    10,    10,    10,
+      10,    10,    10,    10,    10,     8
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     5,     6,     7,     8,     9,    14,    15,    16,    17,
-      18,    19,    20,    10,    10,    10,    10,    10,     0,    14,
-       4,     4,     4,     4,     4,    10,    10,    10,    10,    10,
-      10,    10,    10,    10,    10,    10
+       0,     5,     6,     7,     8,     9,    13,    15,    16,    17,
+      18,    19,    20,    21,    22,    10,    10,    10,    10,    10,
+       0,    15,     4,     4,     4,     4,     4,     4,    10,    10,
+      10,    10,    10,    10,    10,    10,    10,    10,    10
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    13,    14,    14,    15,    15,    15,    15,    15,    16,
-      17,    18,    19,    20
+       0,    14,    15,    15,    16,    16,    16,    16,    16,    16,
+      16,    17,    18,    19,    20,    21,    22
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1,     2,     2,     2,     2,     2,     2,     3,
-       5,     4,     5,     4
+       0,     2,     1,     2,     2,     2,     2,     2,     2,     1,
+       2,     3,     5,     4,     5,     4,     1
 };
 
 
@@ -1227,38 +1228,76 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 9:
-#line 40 "zoomjoystrong.y" /* yacc.c:1646  */
-    {point((yyvsp[-1].i),(yyvsp[0].i));}
-#line 1234 "zoomjoystrong.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 10:
-#line 43 "zoomjoystrong.y" /* yacc.c:1646  */
-    {line((yyvsp[-3].i),(yyvsp[-2].i),(yyvsp[-1].i),(yyvsp[0].i));}
-#line 1240 "zoomjoystrong.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 11:
+        case 11:
 #line 46 "zoomjoystrong.y" /* yacc.c:1646  */
-    {circle((yyvsp[-2].i),(yyvsp[-1].i),(yyvsp[0].i));}
-#line 1246 "zoomjoystrong.tab.c" /* yacc.c:1646  */
+    {	if((yyvsp[-1].i) >= 0 && (yyvsp[-1].i) <= 1024 && (yyvsp[0].i) >= 0 && (yyvsp[0].i) <= 768 ){
+		point((yyvsp[-1].i),(yyvsp[0].i));/* printf("\npoint found\n");*/
+	}
+}
+#line 1238 "zoomjoystrong.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 49 "zoomjoystrong.y" /* yacc.c:1646  */
-    {rectangle((yyvsp[-3].i),(yyvsp[-2].i),(yyvsp[-1].i),(yyvsp[0].i));}
-#line 1252 "zoomjoystrong.tab.c" /* yacc.c:1646  */
+#line 52 "zoomjoystrong.y" /* yacc.c:1646  */
+    {
+	if((yyvsp[-3].i) >= 0 && (yyvsp[-3].i) <= 1024 && (yyvsp[-2].i) >= 0 && (yyvsp[-2].i) <= 768 && (yyvsp[-1].i) >= 0 && (yyvsp[-1].i) <=1024 && (yyvsp[0].i) >= 0 && (yyvsp[0].i) <= 768 ){
+		line((yyvsp[-3].i),(yyvsp[-2].i),(yyvsp[-1].i),(yyvsp[0].i));/* printf("\nline found with points %d %d %d %d\n", $2, $3, $4, $5);*/
+	}else{
+		printf("your line went off the screen! Height must be between 0-768 while height must be between 0-1024. Your values were %d %d %d %d", (yyvsp[-3].i), (yyvsp[-2].i), (yyvsp[-1].i), (yyvsp[0].i));
+	}
+}
+#line 1250 "zoomjoystrong.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 52 "zoomjoystrong.y" /* yacc.c:1646  */
-    {set_color((yyvsp[-2].i),(yyvsp[-1].i),(yyvsp[0].i));}
-#line 1258 "zoomjoystrong.tab.c" /* yacc.c:1646  */
+#line 61 "zoomjoystrong.y" /* yacc.c:1646  */
+    {
+	if((yyvsp[-2].i) + (yyvsp[0].i) <= 1024 && (yyvsp[-2].i) - (yyvsp[0].i) >= 0 && (yyvsp[-1].i) + (yyvsp[0].i) <= 768 && (yyvsp[-1].i) - (yyvsp[0].i) >= 0 ){
+		circle((yyvsp[-2].i),(yyvsp[-1].i),(yyvsp[0].i));
+	}else{
+		printf("Your circle was out of bounds! Circle edges must be within the screen. Total Values must be between 0 and 1024 for width and between 0 and 768 for height. Your values were %d %d %d %d ", (yyvsp[-2].i) + (yyvsp[0].i), (yyvsp[-2].i) - (yyvsp[0].i), (yyvsp[-1].i) + (yyvsp[0].i), (yyvsp[-1].i) - (yyvsp[0].i));
+	}
+}
+#line 1262 "zoomjoystrong.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 14:
+#line 70 "zoomjoystrong.y" /* yacc.c:1646  */
+    {
+
+	if((yyvsp[-3].i) >= 0 && (yyvsp[-3].i) + (yyvsp[-1].i) <= 1024 && (yyvsp[-2].i) >= 0 && (yyvsp[-2].i) + (yyvsp[0].i) <= 768){
+		rectangle((yyvsp[-3].i),(yyvsp[-2].i),(yyvsp[-1].i),(yyvsp[0].i));
+	}else{
+		printf("Your rectangle was out of bounds! Rectangle edges must be within the screen. Total Values must be between 0 and 1024 for width and between 0 and 768 for height. Your values were %d %d %d %d", (yyvsp[-3].i), (yyvsp[-2].i), (yyvsp[-3].i) + (yyvsp[-1].i), (yyvsp[-2].i) + (yyvsp[0].i));
+	}
+}
+#line 1275 "zoomjoystrong.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 15:
+#line 80 "zoomjoystrong.y" /* yacc.c:1646  */
+    {
+	if((yyvsp[-2].i) > 255 || (yyvsp[-2].i) < 0 || (yyvsp[-1].i) > 255 || (yyvsp[-1].i) < 0 || (yyvsp[0].i) > 255 || (yyvsp[0].i) < 0){
+		printf("Error, colors must be within the 0-255 inclusive range. Your values were %d %d %d", (yyvsp[-2].i), (yyvsp[-1].i), (yyvsp[0].i));
+	}else{
+
+
+		set_color((yyvsp[-2].i),(yyvsp[-1].i),(yyvsp[0].i));
+	}
+}
+#line 1289 "zoomjoystrong.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 16:
+#line 91 "zoomjoystrong.y" /* yacc.c:1646  */
+    {printf("You provided an unparseable command. Please retry.");
+
+}
+#line 1297 "zoomjoystrong.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1262 "zoomjoystrong.tab.c" /* yacc.c:1646  */
+#line 1301 "zoomjoystrong.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1486,11 +1525,15 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 55 "zoomjoystrong.y" /* yacc.c:1906  */
+#line 95 "zoomjoystrong.y" /* yacc.c:1906  */
 
 int main(int argc, char** argv){
+	setup();
+	
+	
 	yyparse();
-
+	
+	finish();	
 	return 0;
 }
 void yyerror(const char* msg){

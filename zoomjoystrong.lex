@@ -1,6 +1,7 @@
 %{
 	#include "zoomjoystrong.tab.h"
 	#include <stdlib.h>
+	#include <string.h>
 %}
 
 %option noyywrap
@@ -11,13 +12,15 @@
 
 %%
 
-(line)[ ][0-9]+[ ][0-9]+[ ][0-9]+  {strcpy(yylval.str, yytext);return LINE;} 
-(point)[ ][0-9]+[ ][0-9]+       { strcpy(yylval.str, yytext); return POINT; }
-(circle)[ ][0-9]+[ ][0-9]+[ ][0-9]+ { strcpy(yylval.str, yytext); return CIRCLE; }
-(rectangle)[ ][0-9]+[ ][0-9]+[ ][0-9]+[ ][0-9]+ { strcpy(yylval.str, yytext); return RECTANGLE; }
-(set_color)[ ][0-9]+[ ][0-9]+[ ][0-9]+ { strcpy(yylval.str, yytext); return SET_COLOR; }
-[ \t\n]				            ;
+(line) 					{ printf("\nLINE ");return LINE;} 
+(point) 				{ printf("\nPOINT ");  return POINT; }
+(circle)				{ printf("\nCIRCLE "); return CIRCLE; }
+(rectangle)				{ printf("\nRECTANGLE "); return RECTANGLE; }
+(set_color)				{ printf("\nSET_COLOR "); return SET_COLOR; }
+[0-9]+					{ yylval.i = atoi(yytext);   printf("%d ", yylval.i); return INT;}
+-[0-9]+					{yylval.i = atoi(yytext);	printf("%d ", yylval.i); return INT;}
 \;                              {return END_STATEMENT;}
-.                               {printf("error`");}
+[ \t\n]					;
 
+.                              {printf("\nerror\n"); return ERROR_INPUT;}
 %%
