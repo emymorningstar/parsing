@@ -36,7 +36,7 @@
 drawing_list:	drawing
 	|	drawing drawing_list
 
-;
+	;
 drawing: 	point END_STATEMENT
 	|	line END_STATEMENT
 	|	circle END_STATEMENT
