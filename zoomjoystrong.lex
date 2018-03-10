@@ -19,8 +19,7 @@
 (set_color)				{ printf("\nSET_COLOR "); return SET_COLOR; }
 [0-9]+					{ yylval.i = atoi(yytext);   printf("%d ", yylval.i); return INT;}
 -[0-9]+					{yylval.i = atoi(yytext);	printf("%d ", yylval.i); return INT;}
-\;                              {return END_STATEMENT;}
+\;                              	{return END_STATEMENT;}
 [ \t\n]					;
-
-.                              {printf("\nerror\n"); return ERROR_INPUT;}
+.                              		{printf("\nerror\n"); return ERROR_INPUT;}
 %%
